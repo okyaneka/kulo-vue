@@ -32,7 +32,7 @@ export default {
     toasts: [],
   }),
   created() {
-    this.$root.$on("toast:push", this.push);
+    this.$root.$on("push:toast", this.push);
   },
   methods: {
     top(index) {
