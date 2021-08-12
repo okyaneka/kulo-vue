@@ -64,18 +64,18 @@ export default {
         setTimeout(() => {
           this.loading = false;
           if (this.formData.id != "admin") {
-            return this.$root.$emit("toast:push", {
+            return this.$root.$emit("push:toast", {
               type: "error",
               text: this.$t("Couldn't find your account!"),
             });
           }
           if (this.formData.password != "password") {
-            return this.$root.$emit("toast:push", {
+            return this.$root.$emit("push:toast", {
               type: "error",
               text: this.$t("Wrong password!"),
             });
           }
-          this.$root.$emit("toast:push", {
+          this.$root.$emit("push:toast", {
             type: "success",
             text: this.$t("Login success!"),
           });
