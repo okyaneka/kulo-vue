@@ -1,11 +1,22 @@
 <template>
   <v-row no-gutters>
-    <v-navigation-drawer v-model="drawer" color="white" permanent :mini-variant="mini">
+    <v-navigation-drawer
+      v-model="drawer"
+      color="white"
+      :permanent="!collapse"
+      :absolute="collapse"
+      :temporary="collapse"
+      :mini-variant="mini"
+    >
       <v-list-item>
-        <v-list-item-content>
+        <v-list-item-avatar>
+          <v-img src="/favicon.png"></v-img>
+        </v-list-item-avatar>
+
           <v-list-item-title class="text-h6">
             {{ title }}
           </v-list-item-title>
+        <v-list-item-content>
         </v-list-item-content>
       </v-list-item>
       <v-divider />
@@ -37,10 +48,11 @@
 
     <v-main class="overflow-y-auto" style="height: 100vh">
       <v-app-bar dense flat>
+        <v-app-bar-nav-icon v-show="collapse" @click="drawer = !drawer"></v-app-bar-nav-icon>
         <v-spacer />
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
-            <v-app-bar-nav-icon v-bind="attrs" v-on="on"></v-app-bar-nav-icon>
+            <v-btn v-on="on" v-bind="attrs" icon> <v-icon>$menu</v-icon></v-btn>
           </template>
           <v-list dense>
             <v-list-item @click="logout">
@@ -70,6 +82,10 @@ export default {
   computed: {
     title() {
       return process.env.VUE_APP_TITLE;
+    },
+    collapse() {
+      console.log(this.$vuetify.breakpoint.mdAndUp);
+      return !this.$vuetify.breakpoint.mdAndUp;
     },
   },
   mounted() {
