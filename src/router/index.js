@@ -1,27 +1,38 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import views from "../views";
+import store from "@/store";
+import storage, { REDIRECT } from "../helper/storage";
 
 Vue.use(VueRouter);
 
 const routes = [
+  { path: "/", component: views("home"), name: "dashboard" },
   {
     path: "/",
     name: "home",
-    redirect: "/login",
     component: views("auth/layout"),
     children: [
-      { path: "/login", name: "login", component: views("auth/login"), meta: {} },
-      { path: "/register", name: "register", component: views("auth/register"), meta: {} },
       {
-        path: "/forget-password",
+        path: "login",
+        name: "login",
+        component: views("auth/login"),
+        meta: { guest: true },
+      },
+      {
+        path: "register",
+        name: "register",
+        component: views("auth/register"),
+        meta: { guest: true },
+      },
+      {
+        path: "forget-password",
         name: "forget-password",
         component: views("auth/forget-password"),
-        meta: {},
+        meta: { guest: true },
       },
     ],
   },
-  { path: "/not", component: views("home") },
 ];
 
 const router = new VueRouter({
@@ -30,7 +41,18 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((from, to, next) => {
+router.beforeEach((to, from, next) => {
+  const isLoggedIn = store.getters["auth/isLoggedIn"];
+  const guest = to.meta && to.meta.guest;
+  const auth = to.meta && to.meta.auth;
+
+  if (isLoggedIn && guest) {
+    return next({ name: "dashboard" });
+  }
+  if (!isLoggedIn && auth) {
+    storage.set(REDIRECT, to);
+    return next({ name: "login" });
+  }
   return next();
 });
 

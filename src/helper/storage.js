@@ -1,7 +1,7 @@
 const AUTH_DATA = "AUTH_DATA";
+const REDIRECT = "REDIRECT";
 
-export { AUTH_DATA };
-
+export { AUTH_DATA, REDIRECT };
 export default {
   set: (name, value) => {
     localStorage.setItem(name, JSON.stringify(value));
@@ -9,7 +9,7 @@ export default {
   get: (name) => {
     return JSON.parse(localStorage.getItem(name));
   },
-  del: (name) => {
+  destroy: (name) => {
     localStorage.removeItem(name);
   },
 };

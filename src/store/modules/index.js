@@ -1,1 +1,1 @@
-export default (module) => import(`./${module}`);
+export default (module) => require(`./${module}`).default;
