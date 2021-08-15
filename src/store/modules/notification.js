@@ -1,17 +1,35 @@
-function random(char) {
-  let chars = "";
-  for (let i = 0; i < char; i++) {
-    chars += Math.floor(Math.random() * 32).toString(32);
-  }
-  return chars;
-}
+import axios from "axios";
+import { notifications as RESOURCE } from "@/router/api";
+
+const SET_DATA = "SET_DATA";
+const SET_NOTIF = "SET_NOTIF";
+const PUSH_NOTIF = "PUSH_NOTIF";
 
 export default {
   namespaced: true,
-  state: () => [],
+  state: () => ({
+    data: {},
+    detail: {},
+    notifications: [],
+  }),
+  getters: {},
   mutations: {
-    push: (state, text) => {
-      state.push({ key: random(4), state: true, text });
+    SET_DATA: (state, data) => (state.data = data),
+    SET_NOTIF: (state, data) => (state.notifications = data),
+    PUSH_NOTIF: (state, data) => state.notifications.push(...data),
+  },
+  actions: {
+    async index({ commit }) {
+      const params = { page: 1, limit: 5 };
+      const RESPONSE = await axios.get(RESOURCE.index, params);
+      commit(SET_DATA, RESPONSE);
+      commit(SET_NOTIF, RESPONSE.items);
+    },
+    async more({ commit, state }, params) {
+      params = { page: state.page, limit: state.limit, ...params };
+      const RESPONSE = await axios.get(RESOURCE.index, params);
+      commit(SET_DATA, RESPONSE);
+      commit(PUSH_NOTIF, RESPONSE.items);
     },
   },
 };

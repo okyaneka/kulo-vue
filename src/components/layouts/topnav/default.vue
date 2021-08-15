@@ -2,11 +2,7 @@
   <v-app-bar dense flat>
     <v-app-bar-nav-icon v-show="collapse" @click="$emit('click:nav-icon')"></v-app-bar-nav-icon>
     <v-spacer />
-    <v-menu offset-y>
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn v-on="on" v-bind="attrs" icon> <v-icon>mdi-bell</v-icon></v-btn>
-      </template>
-    </v-menu>
+    <notifications-menu/>
     <v-menu min-width="224" offset-y>
       <template v-slot:activator="{ on, attrs }">
         <v-btn v-on="on" v-bind="attrs" icon> <v-icon>mdi-dots-vertical</v-icon></v-btn>
@@ -29,7 +25,9 @@
 </template>
 
 <script>
+import NotificationsMenu from '../feature/notifications-menu.vue';
 export default {
+  components: { NotificationsMenu },
   props: {
     collapse: Boolean,
   },

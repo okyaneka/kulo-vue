@@ -1,7 +1,6 @@
 <template>
   <v-row no-gutters>
-    <sidenav-default v-model="drawer" :collapse="collapse" />
-
+    <sidenav-default color="primary" v-model="drawer" :collapse="collapse" />
     <v-main class="overflow-y-auto" style="height: 100vh">
       <topnav-default @click:nav-icon="drawer = !drawer" :collapse="collapse" />
       <v-container fluid class="overflow-y-auto" style="height: calc(100% - 48px)">

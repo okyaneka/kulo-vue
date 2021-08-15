@@ -1,7 +1,8 @@
 <template>
   <v-navigation-drawer
     v-model="drawer"
-    color="white"
+    :color="background"
+    :dark="dark"
     :permanent="!collapse"
     :absolute="collapse"
     :temporary="collapse"
@@ -19,7 +20,7 @@
     </v-list-item>
     <v-divider />
     <v-list nav dense>
-      <v-list-item-group v-model="selectedItem" color="primary">
+      <v-list-item-group v-model="selectedItem" :dark="dark" :color="color">
         <v-list-item v-for="(item, index) in menuItems" :key="index" link :to="item.to">
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -57,6 +58,9 @@ export default {
   props: {
     model: Boolean,
     collapse: Boolean,
+    color: String,
+    background: String,
+    dark: Boolean,
   },
   data: () => ({
     expand: null,

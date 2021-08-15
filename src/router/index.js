@@ -7,7 +7,7 @@ import storage, { REDIRECT } from "../helper/storage";
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/", component: views("home"), name: "dashboard" },
+  { path: "/", component: views("home"), name: "dashboard", meta: { auth: true } },
   {
     path: "/",
     name: "home",

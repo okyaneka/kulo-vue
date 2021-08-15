@@ -80,7 +80,6 @@ export default {
             text: this.$t("Login success!"),
           });
           this.$store.commit("auth/SET_USER", { token: "token" });
-            console.log(storage.get(REDIRECT));
           if (storage.get(REDIRECT)) {
             const redirect = storage.get(REDIRECT);
             storage.destroy(REDIRECT);

@@ -1,1 +1,77 @@
-$material-light: (background: #F7F7F7)
+@use "sass:map";
+
+$material-light: (
+  background: #f7f7f7,
+);
+
+// Headings
+$headings: (
+  "h1": (
+    "size": 6rem,
+    "weight": 600,
+    "line-height": 9rem,
+    "letter-spacing": 6px,
+  ),
+  "h2": (
+    "size": 3.75rem,
+    "weight": 600,
+    "line-height": 5.625rem,
+    "letter-spacing": 3.75px,
+  ),
+  "h3": (
+    "size": 3rem,
+    "weight": 600,
+    "line-height": 4.5rem,
+    "letter-spacing": 3px,
+  ),
+  "h4": (
+    "size": 2.125rem,
+    "weight": 600,
+    "line-height": 3.1875rem,
+    "letter-spacing": 2.125px,
+  ),
+  "h5": (
+    "size": 1.5rem,
+    "weight": 600,
+    "line-height": 2.25rem,
+    "letter-spacing": 1.5px,
+  ),
+  "h6": (
+    "size": 1.25rem,
+    "weight": 600,
+    "line-height": 1.87rem,
+    "letter-spacing": 1.25px,
+  ),
+  "subtitle-1": (
+    "size": 1rem,
+    "weight": 300,
+    "line-height": 125%,
+    "letter-spacing": 1px,
+  ),
+  "subtitle-2": (
+    "size": 0.875rem,
+    "weight": 300,
+    "line-height": 125%,
+    "letter-spacing": 0.875px,
+  ),
+  "body-1": (
+    "size": 1rem,
+    "weight": 400,
+    "line-height": 1.5rem,
+    "letter-spacing": 1px,
+  ),
+  "body-2": (
+    "size": 0.875rem,
+    "weight": 400,
+    "line-height": 1.3125rem,
+    "letter-spacing": 0.875px,
+  ),
+);
+
+// Card
+// $card-text-font-size: map.get($headings, "body-1", "size");
+// $card-text-font-weight: map.get($headings, "body-1", "weight");
+// $card-text-line-height: map.get($headings, "body-1", "line-height");
+// $card-text-letter-spacing: map.get($headings, "body-1", "letter-spacing");
+
+$list-item-action-icon-margin: 16px;
