@@ -1,32 +1,36 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-main>
+      <v-row v-if="loading" class="fill-height" align="center" justify="center">
+        <v-progress-circular class="d-block" size="64" width="4" indeterminate color="primary" />
+      </v-row>
+      <v-fade-transition v-else hide-on-leave leave-absolute>
+        <router-view />
+      </v-fade-transition>
+    </v-main>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<script>
+export default {
+  data: () => ({
+    loading: null,
+  }),
+  mounted() {
+    this.$root.$on('loading-init', () => {
+      this.loading = true;
+    });
+    this.$root.$on('loading-end', () => {
+      this.loading = false;
+    });
+    this.initApp();
+  },
+  methods: {
+    async initApp() {
+      this.$root.$emit('loading-init');
+      await this.$store.dispatch('init-app');
+      this.$root.$emit('loading-end');
+    },
+  },
+};
+</script>
