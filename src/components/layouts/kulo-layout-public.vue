@@ -1,7 +1,13 @@
 <template>
-  <v-container class="fill-height">
+  <v-container :class="fillHeight ? 'fill-height' : ''">
     <v-row v-if="loading" class="fill-height" align="center" justify="center">
-      <v-progress-circular class="d-block" size="64" width="4" indeterminate color="primary" />
+      <v-progress-circular
+        class="d-block"
+        size="64"
+        width="4"
+        indeterminate
+        color="primary"
+      />
     </v-row>
     <v-row v-else>
       <slot />
@@ -13,6 +19,7 @@
 export default {
   props: {
     loading: Boolean,
+    fillHeight: Boolean,
   },
   data: () => ({}),
   mounted() {},

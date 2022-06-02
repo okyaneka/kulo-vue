@@ -12,6 +12,11 @@ const web = [
     name: 'about',
     component: view('public/public-about'),
   },
+  {
+    path: '/canvas',
+    name: 'canvas',
+    component: view('public/public-canvas'),
+  },
 ];
 
 export { api };
